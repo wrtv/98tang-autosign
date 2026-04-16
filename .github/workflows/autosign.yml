@@ -103,7 +103,7 @@ jobs:
         ENABLE_SMART_TIMING: ${{ vars.ENABLE_SMART_TIMING || 'true' }}
         
         # Telegram通知配置
-        ENABLE_TELEGRAM_NOTIFICATION: ${{ vars.ENABLE_TELEGRAM_NOTIFICATION || 'false' }}
+        ENABLE_TELEGRAM_NOTIFICATION: ${{ vars.ENABLE_TELEGRAM_NOTIFICATION || 'true' }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_PROXY_URL: ${{ secrets.TELEGRAM_PROXY_URL }}
@@ -133,15 +133,6 @@ jobs:
         echo ""
         
         python main.py
-        
-    - name: 上传日志和调试文件
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: autosign-logs-environment-${{ github.run_number }}
-        path: |
-          logs/
-        retention-days: 30
         
     - name: 执行结果通知
       if: always()
